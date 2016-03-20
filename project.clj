@@ -13,4 +13,4 @@
                  [org.clojure/tools.nrepl "0.2.0-beta9"]
                  [hiccup "1.0.1"]]
   :dev-dependencies [[lein-ring "0.9.7"]]
-  :main com.rewards-system.main)
+  :main rewards-system.main)
