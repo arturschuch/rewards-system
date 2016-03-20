@@ -1,19 +1,34 @@
 (ns reward-system.rest.handler
-  (:use reward-system.core)
-  (:use compojure.core)
-  (:use cheshire.core)
-  (:use ring.util.response)
-  (:require [compojure.handler :as handler]
-            [ring.middleware.json :as middleware]
-            [compojure.route :as route]
-            [reward-system.core :as reward]))
+  (:use [compojure.core]
+        [ring.middleware.params]
+        [ring.middleware.multipart-params]
+        [ring.adapter.jetty]
+        [hiccup.core]
+        [clojure.java.io])
+  (:import [java.io File])
+  (:require [com.rewards-system.data-structure.customer :as customer]
+            [clojure.string :as string]))
 
-(defroutes app-routes
-  (context "/rewards" [] (defroutes rewards-routes
-      (POST "/" {body :body} (println body "<<<-"))))
-   (route/not-found "Not Found"))
+(defn home-page []
+  (html [:form {:action "/file" :method "post" :enctype "multipart/form-data"}
+        [:input {:name "file" :type "file" :size "20"}]
+        [:input {:type "submit" :name "submit" :value "submit"}]]))
+
+(defn read-file
+  "Read file and break into lines to each line be added how cusotmer and guest."
+  [file]
+  (with-open [rdr (reader file)]
+    (doseq [line (line-seq rdr)]
+      (println (add-to-customers line)))))
+
+(defroutes handler
+  (POST "/file" {params :params} 
+        (read-file ((get params "file") :tempfile)))
+
+  (GET "/" [] 
+       (home-page)))
 
 (def app
-	(-> (handler/api app-routes)
-	    (middleware/wrap-json-body)
-	    (middleware/wrap-json-response)))
+  (-> handler
+      wrap-params
+      wrap-multipart-params)))
