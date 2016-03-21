@@ -21,7 +21,7 @@ run tests:
   lein test
   
 run system on port 8080:
-  lein server
+  lein run
 
 Visit the link localhost:8080/ to upload file to be imported by system, it will be returned json with prize of customers.
 
