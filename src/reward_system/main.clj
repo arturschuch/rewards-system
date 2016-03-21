@@ -1,4 +1,4 @@
-(ns com.rewards-system.main
+(ns rewards-system.main
   (:require [com.rewards-system.rest.handler :as handler])
   (:use [ring.adapter.jetty]))
 
