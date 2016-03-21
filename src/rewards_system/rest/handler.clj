@@ -14,6 +14,10 @@
         [:input {:name "file" :type "file" :size "20"}]
         [:input {:type "submit" :name "submit" :value "submit"}]]))
 
+(def customers
+  "customers list."
+  (atom (hash-map)))
+
 (defn get-indexed-value
   "Return indexed value of string, separated by spaces.
    Example:
@@ -26,27 +30,28 @@
   [customers]
   {:status 200
       :headers {"Content-Type" "text/html"}
-      :body (html [:h1 customers])})
+      :body (html [:h1 (str customers)] )})
 
 (defn add-to-customers
   "Add to customers data structure"
   [line]
-  (do 
+  (do
     (def customer-name (get-indexed-value line 0))
     (def guest-name (get-indexed-value  line 1))
-    (println (customer/add customer-name guest-name))))
+    (swap! customers conj (customer/add customer-name guest-name))))
 
 (defn read-file
   "Read file and break into lines to each line be added how cusotmer and guest."
   [file]
-  (with-open [rdr (reader file)]
+  (with-open [rdr (reader file)]   
     (doseq [line (line-seq rdr)]
       (add-to-customers line))))
 
 (defroutes handler
   (POST "/file" {params :params} 
-    (do
-      (read-file ((get params "file") :tempfile))))
+    (do 
+      (read-file ((get params "file") :tempfile)))
+      (show-customers @customers))
 
   (GET "/" [] 
     (home-page)))
