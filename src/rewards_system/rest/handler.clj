@@ -10,7 +10,7 @@
   (:import [java.io File])
   (:require [rewards-system.data-structure.customer :as customer]
             [clojure.string :as string]
-            [ring.middleware.json :as wrap-json-response]
+            [ring.middleware.json :as json]
             [ring.util.response :as response]))
 
 (defn home-page []
@@ -29,12 +29,6 @@
      (get-indexed-value '1 2' 0) return 1"
   [x index]
   (get (string/split x #"\s") index))
-
-(defn show-customers
-  [customers]
-  {:status 200
-      :headers {"Content-Type" "text/html"}
-      :body (html [:h1 (str customers)] )})
 
 (defn add-to-customers
   "Add to customers data structure"
@@ -64,4 +58,4 @@
   (-> handler
       wrap-params
       wrap-multipart-params
-      wrap-json-response/wrap-json-params))
+      json/wrap-json-params))
