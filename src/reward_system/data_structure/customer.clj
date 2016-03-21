@@ -1,4 +1,4 @@
-(ns com.rewards-system.data-structure.customer 
+(ns rewards-system.data-structure.customer 
   (:require [clojure.contrib.math :as math]))
 
 (def customers
