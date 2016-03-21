@@ -28,24 +28,29 @@
   (do 
     (def customer-name (get-indexed-value line 0))
     (def guest-name (get-indexed-value  line 1))
-    (def customers (customer/add customer-name guest-name))
-    {:status 200
-       :headers {"Content-Type" "text/html"}
-       :body (html [:h1 customers])}))
+    (def customers (customer/add customer-name guest-name))))
+
+(defn show-customers
+  [customers]
+  {:status 200
+      :headers {"Content-Type" "text/html"}
+      :body (html [:h1 customers])})))
 
 (defn read-file
   "Read file and break into lines to each line be added how cusotmer and guest."
   [file]
   (with-open [rdr (reader file)]
     (doseq [line (line-seq rdr)]
-      (println (add-to-customers line)))))
+      (add-to-customers line))))
 
 (defroutes handler
   (POST "/file" {params :params} 
-        (read-file ((get params "file") :tempfile)))
+    (do
+      (def customers (read-file ((get params "file") :tempfile)))
+      (show-customers customers)))
 
   (GET "/" [] 
-       (home-page)))
+    (home-page)))
 
 (def app
   (-> handler
