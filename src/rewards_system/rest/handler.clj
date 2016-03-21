@@ -4,10 +4,14 @@
         [ring.middleware.multipart-params]
         [ring.adapter.jetty]
         [hiccup.core]
-        [clojure.java.io])
+        [clojure.java.io]
+        [ring.middleware.json :only [wrap-json-body]]
+        [ring.util.response :only [response]])
   (:import [java.io File])
   (:require [rewards-system.data-structure.customer :as customer]
-            [clojure.string :as string]))
+            [clojure.string :as string]
+            [ring.middleware.json :as wrap-json-response]
+            [ring.util.response :as response]))
 
 (defn home-page []
   (html [:form {:action "/file" :method "post" :enctype "multipart/form-data"}
@@ -50,8 +54,8 @@
 (defroutes handler
   (POST "/file" {params :params} 
     (do 
-      (read-file ((get params "file") :tempfile)))
-      (show-customers @customers))
+      (read-file ((get params "file") :tempfile))
+      (response/response (str @customers))))
 
   (GET "/" [] 
     (home-page)))
@@ -59,4 +63,5 @@
 (def app
   (-> handler
       wrap-params
-      wrap-multipart-params))
+      wrap-multipart-params
+      wrap-json-response/wrap-json-params))
