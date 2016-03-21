@@ -1,4 +1,4 @@
-(ns reward-system.rest.handler
+(ns rewards-system.rest.handler
   (:use [compojure.core]
         [ring.middleware.params]
         [ring.middleware.multipart-params]
@@ -34,7 +34,7 @@
   [customers]
   {:status 200
       :headers {"Content-Type" "text/html"}
-      :body (html [:h1 customers])})))
+      :body (html [:h1 customers])})
 
 (defn read-file
   "Read file and break into lines to each line be added how cusotmer and guest."
