@@ -28,7 +28,7 @@
   (do 
     (def customer-name (get-indexed-value line 0))
     (def guest-name (get-indexed-value  line 1))
-    (def customers (customer/add customer-name guest-name))))
+    (customer/add customer-name guest-name)))
 
 (defn show-customers
   [customers]
@@ -47,7 +47,7 @@
   (POST "/file" {params :params} 
     (do
       (def customers (read-file ((get params "file") :tempfile)))
-      (show-customers customers)))
+      (map (fn [x] (show-customers x)) customers)))
 
   (GET "/" [] 
     (home-page)))
