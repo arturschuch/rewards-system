@@ -14,25 +14,6 @@
         [:input {:name "file" :type "file" :size "20"}]
         [:input {:type "submit" :name "submit" :value "submit"}]]))
 
-(defn get-indexed-value
-  "Return indexed value of string, separated by spaces.
-   Example:
-     (get-indexed-value '1 2' 1) return 2
-     (get-indexed-value '1 2' 0) return 1"
-  [x index]
-  (get (string/split x #"\s") index))
-
-(defn add-to-customers
-  "Add to customers data structure"
-  [line]
-  (do 
-    (def customer-name (get-indexed-value line 0))
-    (def guest-name (get-indexed-value  line 1))
-    (def customers (customer/add customer-name guest-name))
-    {:status 200
-       :headers {"Content-Type" "text/html"}
-       :body (html [:h1 customers])}))
-
 (defn read-file
   "Read file and break into lines to each line be added how cusotmer and guest."
   [file]
@@ -50,4 +31,4 @@
 (def app
   (-> handler
       wrap-params
-      wrap-multipart-params))
+      wrap-multipart-params)))
