@@ -1,6 +1,6 @@
 (ns rewards-system.data-structure.customer-test
   (:require [clojure.test :refer :all]
-            [com.rewards-system.data-structure.customer :as customer]))
+            [rewards-system.data-structure.customer :as customer]))
 
 (def customer-to-test
   {:name 1 :invited-by nil :invitations [] :prize 0 :inviting-paid false :last-fractional-value 1})

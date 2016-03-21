@@ -6,7 +6,7 @@
         [hiccup.core]
         [clojure.java.io])
   (:import [java.io File])
-  (:require [com.rewards-system.data-structure.customer :as customer]
+  (:require [rewards-system.data-structure.customer :as customer]
             [clojure.string :as string]))
 
 (defn home-page []

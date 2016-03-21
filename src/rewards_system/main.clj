@@ -1,5 +1,5 @@
 (ns rewards-system.main
-  (:require [com.rewards-system.rest.handler :as handler])
+  (:require [rewards-system.rest.handler :as handler])
   (:use [ring.adapter.jetty]))
 
 (def port 8080)  
