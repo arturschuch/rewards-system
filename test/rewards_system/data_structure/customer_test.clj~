@@ -102,28 +102,3 @@
     (is (= (customer/update-list customer-to-test) (hash-map (customer-to-test :name) customer-to-test)))
     (is (= (customer/get-investing guest-to-test) customer-to-test))))
 
-(deftest add-test
-  (testing "Enunciation Exercise
-            Example:
-              1 2
-              1 3 
-              3 4
-              2 4
-              4 5
-              4 6
-            The score is:
-              1 - 2.5 (2 because he invited 2 and 3 plus 0.5 as 3 invited 4)
-              3 - 1 (1 as 3 invited 4 and 4 invited someone)
-              2 - 0 (even as 2 invited 4, it doesn't count as 4 was invited before by 3)
-              4 - 0 (invited 5 and 6, but 5 and 6 didn't invite anyone)"
-     (customer/add 1 2)
-     (customer/add 1 3)
-     (customer/add 3 4)
-     (customer/add 2 4)
-     (customer/add 4 5)
-     (customer/add 4 6)
-     (is (= ((customer/get-customer 1) :prize) 2.5))
-     (is (= ((customer/get-customer 3) :prize) 1))
-     (is (= ((customer/get-customer 2) :prize) 0))
-     (is (= ((customer/get-customer 4) :prize) 0))))
-
