@@ -2,37 +2,48 @@
 
 System designed to reward customers for inviting their friends. They're planning a reward system that will
 
-  Give customer points for each confirmed invitation he played a part into. The definition of a confirmed invitation is when the invitee invited someone.
+#### Respecting the rules:
 
-  He gets (1/2)^k where k is the level of the confirmed invitation: level 0 (people he invited) he gets 1 point, level 1 (people invited by a person he invited) he gets 1/2 points and level 2 invitations (people invited by a person on level 1) awards him 1/4 and so on. Only the first invitation counts: so if someone gets invited by someone that was already invited, it doesn't award any points.
+ * Give customer points for each confirmed invitation he played a part into. The definition of a confirmed invitation is when the invitee invited someone.
 
-  Also, to count as a valid invitation, the invited customer must have invited someone (so customers that didn't invite anyone don't count as points for the customer that invited them)
- 
+ * He gets (1/2)^k where k is the level of the confirmed invitation: level 0 (people he invited) he gets 1 point, level 1 (people invited by a person he invited) he gets 1/2 points and level 2 invitations (people invited by a person on level 1) awards him 1/4 and so on. Only the first invitation counts: so if someone gets invited by someone that was already invited, it doesn't award any points.
 
-## Dependencies
+ * Also, to count as a valid invitation, the invited customer must have invited someone (so customers that didn't invite anyone don't count as points for the customer that invited them)
 
-To run the system need has leiningen installed
+#### Dependencies
 
-http://leiningen.org/#install
+* To run the system need has leiningen installed _http://leiningen.org/#install
 
-## Use
 
-run tests:
-  lein test
+#### Tests
+
+* Use the command: 
+  ```
+    lein test
+  ```
   
-run system on port 8080:
-  lein run
+#### Start system 
+
+* Use the command: 
+  ```
+    lein run
+  ```
+  
+_System will be started on port 8080
+  
+#### 
 
 Visit the link localhost:8080/ to upload file to be imported by system, it will be returned json with prize of customers.
 
-## Logic Used
+#### Logic Used
 
-The solution taken was to create a data structure inspired by a graph where each customer (node) is connected to the customer who invited him (parent node), but the customer who invited also having the connection with the guest customer (child node) the two have a connection, all being saved in a HashMap with id as the key to the structure is as follows (as has the ID to map hash key is very easy to get to each customer):
+_The solution taken was to create a data structure inspired by a graph where each customer (node) is connected to the customer who invited him (parent node), but the customer who invited also having the connection with the guest customer (child node) the two have a connection, all being saved in a HashMap with id as the key to the structure is as follows (as has the ID to map hash key is very easy to get to each customer):
 
-Line Reading Example: 1 2
+_Line Reading Example: 1 2
 
-it Will first be created one structure to 1 and added to the list where:
+_it Will first be created one structure to 1 and added to the list where:
 
+```
 1 {(id reference to the customer being created)
   :Name = 1 (id reference to the customer being created)
   :Invited-by = nill (because no one added it)
@@ -48,10 +59,10 @@ it Will first be created one structure to 1 and added to the list where:
   :Last-fractional-value (attribute to indicate whether the new value that is being passed as part fractional already been calculated                           or if it coming from lower down the hierarquial.
                           Default = 1, because the greatest fractional number is 0.5 with 1 as the initial value will always be                                 overwritten a validation check if the last number is smaller than the old one)
 }
+```
+_then structure will be created for 2, but without invitiations, because at the time it ta be invited so also will have the invited-by pointing to the one that already created and your invitante.
 
-then structure will be created for 2, but without invitiations, because at the time it ta be invited so also will have the invited-by pointing to the one that already created and your invitante.
-
-## License
+#### License
 
 Copyright © 2016 FIXME
 
