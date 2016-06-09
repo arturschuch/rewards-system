@@ -1,6 +1,6 @@
 # reward-system
 
-System designed to reward customers for inviting their friends. They're planning a reward system that will
+System designed to reward customers for inviting their friends.
 
 #### Respecting the rules:
 
@@ -12,8 +12,7 @@ System designed to reward customers for inviting their friends. They're planning
 
 #### Dependencies
 
-* To run the system need has leiningen installed _http://leiningen.org/#install_
-
+* To run the system, is necessary has been installed leiningen _http://leiningen.org/#install_
 
 #### Tests
 
@@ -30,10 +29,19 @@ System designed to reward customers for inviting their friends. They're planning
   ```
   
 _System will be started on port 8080_
-  
-#### 
 
-Visit the link localhost:8080/ to upload file to be imported by system, it will be returned json with prize of customers.
+#### How to Use
+
+* Visit the link localhost:8080/
+
+* Upload the file with format txt by the button, following the patern ("customer's id" "space" "guest's id")
+```  
+  Example:
+    1 2
+    2 3
+    2 4
+```
+* Will be returned JSON with prize of customers. (explanation about json response are on topic "Logic Used").
 
 #### Logic Used
 
