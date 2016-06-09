@@ -12,7 +12,7 @@ System designed to reward customers for inviting their friends. They're planning
 
 #### Dependencies
 
-* To run the system need has leiningen installed _http://leiningen.org/#install
+* To run the system need has leiningen installed _http://leiningen.org/#install_
 
 
 #### Tests
@@ -29,7 +29,7 @@ System designed to reward customers for inviting their friends. They're planning
     lein run
   ```
   
-_System will be started on port 8080
+_System will be started on port 8080_
   
 #### 
 
@@ -37,11 +37,11 @@ Visit the link localhost:8080/ to upload file to be imported by system, it will 
 
 #### Logic Used
 
-_The solution taken was to create a data structure inspired by a graph where each customer (node) is connected to the customer who invited him (parent node), but the customer who invited also having the connection with the guest customer (child node) the two have a connection, all being saved in a HashMap with id as the key to the structure is as follows (as has the ID to map hash key is very easy to get to each customer):
+_The solution taken was to create a data structure inspired by a graph where each customer (node) is connected to the customer who invited him (parent node), but the customer who invited also having the connection with the guest customer (child node) the two have a connection, all being saved in a HashMap with id as the key to the structure is as follows (as has the ID to map hash key is very easy to get to each customer):_
 
-_Line Reading Example: 1 2
+_Line Reading Example: 1 2_
 
-_it Will first be created one structure to 1 and added to the list where:
+_it Will first be created one structure to 1 and added to the list where:_
 
 ```
 1 {(id reference to the customer being created)
@@ -60,7 +60,7 @@ _it Will first be created one structure to 1 and added to the list where:
                           Default = 1, because the greatest fractional number is 0.5 with 1 as the initial value will always be                                 overwritten a validation check if the last number is smaller than the old one)
 }
 ```
-_then structure will be created for 2, but without invitiations, because at the time it ta be invited so also will have the invited-by pointing to the one that already created and your invitante.
+_then structure will be created for 2, but without invitiations, because at the time it ta be invited so also will have the invited-by pointing to the one that already created and your invitante._
 
 #### License
 
